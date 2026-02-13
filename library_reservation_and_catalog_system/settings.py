@@ -77,7 +77,7 @@ REST_FRAMEWORK = {
 
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Addis Community Library API',
+    'TITLE': 'Community Library Reservation and catalog system API',
     'DESCRIPTION': 'REST API for book catalog and reservation system',
     'VERSION': '1.0.0',
 }
