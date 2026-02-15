@@ -74,7 +74,7 @@ library_reservation_and_catalog_system/
    ```bash
     python manage.py runserver
 
-##Usage
+## Usage
 
 Admin Panel: http://127.0.0.1:8000/admin/ → Add categories, books, and view reservations
 API Documentation (Swagger UI): http://127.0.0.1:8000/api/docs/
@@ -85,12 +85,12 @@ GET /api/categories/ → List categories (admin only for CRUD)
 POST /api/reservations/ → Create reservation (handles reserve/queue)
 POST /api/reservations/{id}/cancel/ → Cancel reservation
 
-##Sample Data
+## Sample Data
 The admin panel is pre-seeded with real books (e.g., Things Fall Apart, Beneath the Lion's Gaze, Sapiens) across categories like Fiction, African Literature, and Non-Fiction for easy testing.
 
-##License
+## License
 This project is open-source under the MIT License. Feel free to fork and use it!
 
-##Author
+## Author
 Abdulmenan Amin
 ALX Africa Back-End Development Student
