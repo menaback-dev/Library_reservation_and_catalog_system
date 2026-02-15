@@ -76,14 +76,14 @@ library_reservation_and_catalog_system/
 
 ## Usage
 
-Admin Panel: http://127.0.0.1:8000/admin/ → Add categories, books, and view reservations
-API Documentation (Swagger UI): http://127.0.0.1:8000/api/docs/
-Key Endpoints:
-POST /api/token/ → Get JWT token
-GET /api/books/ → List and search books
-GET /api/categories/ → List categories (admin only for CRUD)
-POST /api/reservations/ → Create reservation (handles reserve/queue)
-POST /api/reservations/{id}/cancel/ → Cancel reservation
+- Admin Panel: http://127.0.0.1:8000/admin/ → Add categories, books, and view reservations
+- API Documentation (Swagger UI): http://127.0.0.1:8000/api/docs/
+- Key Endpoints:
+    - POST /api/token/ → Get JWT token
+    - GET /api/books/ → List and search books
+    - GET /api/categories/ → List categories (admin only for CRUD)
+    - POST /api/reservations/ → Create reservation (handles reserve/queue)
+    - POST /api/reservations/{id}/cancel/ → Cancel reservation
 
 ## Sample Data
 The admin panel is pre-seeded with real books (e.g., Things Fall Apart, Beneath the Lion's Gaze, Sapiens) across categories like Fiction, African Literature, and Non-Fiction for easy testing.
