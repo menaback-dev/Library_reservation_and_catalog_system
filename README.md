@@ -34,15 +34,15 @@ This is my **ALX Back-End development Capstone Project**.
 
 ## Project Structure
 library_reservation_and_catalog_system/
-├── books/                  # Book and Category models, serializers, views
-├── reservations/           # Reservation model with queue logic
-├── users/                  # (Placeholder for future custom user)
-├── library_reservation_and_catalog_system/
-│   ├── settings.py
-│   ├── urls.py             # Main router and JWT endpoints
-│   └── ...
-├── manage.py
-└── db.sqlite3              # Development database
+  ├── books/                  # Book and Category models, serializers, views
+  ├── reservations/           # Reservation model with queue logic
+  ├── users/                  # (Placeholder for future custom user)
+  ├── library_reservation_and_catalog_system/
+  │   ├── settings.py
+  │   ├── urls.py             # Main router and JWT endpoints
+  │   └── ...
+  ├── manage.py
+  └── db.sqlite3              # Development database
 
 ## Installation & Setup
 
