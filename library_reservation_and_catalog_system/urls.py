@@ -20,10 +20,13 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from books.views import CategoryViewSet, BookViewSet
+from reservations.views import ReservationViewSet
+
 
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet)
 router.register(r'books', BookViewSet)
+router.register(r'reservations', ReservationViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
