@@ -12,6 +12,7 @@ from books.models import Book
 class ReservationViewSet(viewsets.ModelViewSet):
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
+    queryset = Reservation.objects.all()
 
     def get_queryset(self):
         return Reservation.objects.filter(
