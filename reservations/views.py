@@ -2,8 +2,9 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import PermissionDenied
 from django.db import transaction
-from django.db.models import Max, F   # ← added this import
+from django.db.models import Max, F
 from .models import Reservation
 from .serializers import ReservationSerializer
 from books.models import Book
@@ -48,6 +49,9 @@ class ReservationViewSet(viewsets.ModelViewSet):
     def cancel(self, request, pk=None):
         reservation = self.get_object()
         book = reservation.book
+
+        if reservation.user != request.user:
+            raise PermissionDenied("You can only cancel your own reservations.")
 
         if reservation.status == 'reserved':
             # Return the copy

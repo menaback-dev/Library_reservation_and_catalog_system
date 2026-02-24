@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets, filters
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from django.contrib.auth import get_user_model
 from .models import Category, Book
 from .serializers import CategorySerializer, BookSerializer
@@ -17,4 +17,4 @@ class BookViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title', 'author', 'isbn']
-    permission_classes = [IsAdminUser]  # CRUD for admins only
+    permission_classes = [IsAdminUser | IsAuthenticatedOrReadOnly]  # CRUD for admins only
