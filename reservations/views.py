@@ -11,6 +11,11 @@ from books.models import Book
 
 
 class ReservationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for managing book reservations.
+    - Authenticated users can reserve books or join queue.
+    - Cancel action promotes next in queue if applicable.
+    """
     serializer_class = ReservationSerializer
     permission_classes = [IsAuthenticated]
     queryset = Reservation.objects.all()
