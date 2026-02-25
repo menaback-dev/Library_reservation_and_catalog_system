@@ -10,6 +10,7 @@ from .serializers import ReservationSerializer
 from books.models import Book
 
 
+
 class ReservationViewSet(viewsets.ModelViewSet):
     """
     API endpoint for managing book reservations.
@@ -59,14 +60,12 @@ class ReservationViewSet(viewsets.ModelViewSet):
             raise PermissionDenied("You can only cancel your own reservations.")
 
         if reservation.status == 'reserved':
-            # Return the copy
             book.available_copies += 1
             book.save(update_fields=['available_copies'])
 
-            # Promote the next person in queue (if any)
+            
             next_in_queue = Reservation.objects.filter(
-                book=book,
-                status='queued'
+                book=book, status='queued'
             ).order_by('queue_position').first()
 
             if next_in_queue:
@@ -74,26 +73,22 @@ class ReservationViewSet(viewsets.ModelViewSet):
                 next_in_queue.queue_position = None
                 next_in_queue.save(update_fields=['status', 'queue_position'])
 
-                # Shift all higher queue positions down by 1
-                Reservation.objects.filter(
-                    book=book,
-                    status='queued',
-                    queue_position__gt=next_in_queue.queue_position
-                ).update(queue_position=F('queue_position') - 1)
-
         elif reservation.status == 'queued':
-            # Just shift the queue positions of people behind this one
-            Reservation.objects.filter(
-                book=book,
-                status='queued',
-                queue_position__gt=reservation.queue_position
-            ).update(queue_position=F('queue_position') - 1)
+            pass  
 
-        # Mark this reservation as cancelled
         reservation.status = 'cancelled'
-        reservation.save(update_fields=['status'])
+        reservation.queue_position = None
+        reservation.save(update_fields=['status', 'queue_position'])
 
-        return Response(
-            {'detail': 'Reservation cancelled successfully.'},
-            status=status.HTTP_200_OK
-        )
+        
+        queued_items = Reservation.objects.filter(
+            book=book,
+            status='queued'
+        ).order_by('queue_position')
+
+        for idx, item in enumerate(queued_items, start=1):
+            if item.queue_position != idx:
+                item.queue_position = idx
+                item.save(update_fields=['queue_position'])
+
+        return Response({'detail': 'Reservation cancelled successfully.'}, status=status.HTTP_200_OK)

@@ -17,7 +17,13 @@ class Reservation(models.Model):
     queue_position = models.PositiveIntegerField(null=True, blank=True)  # Null for reserved, set for queued
 
     class Meta:
-        unique_together = ('user', 'book')  # One active reservation per user per book
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'book'],
+                condition=models.Q(status__in=['reserved', 'queued']),
+                name='unique_active_reservation_per_user_book'
+            )
+        ]
         ordering = ['-reserved_at']
 
     def __str__(self):
